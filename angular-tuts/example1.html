@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Examples</title>
+
+</head>
+<body ng-app="ExampleApp">
+<div ng-controller="myController">  
+  <div my-directive 
+       my-text="hello {{ bar }}" 
+       my-two-way-bind="foo" 
+       my-one-way-bind="bar">
+  </div>
+</div>  
+</div>  
+  <footer style="margin-top:2000px;">footer</footer>
+
+
+  <script src='//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'></script>
+  <script src='//ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js'></script>
+  <script>
+angular.module("ExampleApp", [])  
+  .directive("myDirective", function () {
+    return {
+      restrict: "A",
+      scope: {
+        text: "@myText",
+        twoWayBind: "=myTwoWayBind",
+        oneWayBind: "&myOneWayBind"
+      },
+	  link: function(scope, iElm, iAttrs) {
+		console.log(scope.oneWayBind())
+	  }
+    };
+}).controller("myController", function ($scope) {
+  $scope.foo = {name: "Umur"};
+  $scope.bar = "qwe";
+});
+  </script>
+</body>
+</html>
